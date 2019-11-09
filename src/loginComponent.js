@@ -34,7 +34,7 @@ class LoginWebView extends Component {
             this.setState({ spinner: true });
             let tokens = await this.keycloakService.getToken(redirectUrl);
             this.setState({ spinner: false });
-            this.props.onLogin(tokens);
+            this.props.onLogin(tokens, redirectUrl);
         } else if (this.state.url !== redirectUrl) {
             this.setState({ url: redirectUrl });
         }
