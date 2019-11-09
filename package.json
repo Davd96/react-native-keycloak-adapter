@@ -1,0 +1,26 @@
+{
+  "name": "react-native-keycloak-adapter",
+  "version": "1.0.0",
+  "description": "Adapter to authenticate in keycloak from react native.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "react-native",
+    "keycloak",
+    "adapter",
+    "login"
+  ],
+  "author": "davd96",
+  "license": "MIT",
+  "devDependencies": {
+    "react-native": "^0.61.2"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.6.2",
+    "base-64": "^0.1.0",
+    "query-string": "^6.8.3",
+    "react-native-uuid": "^1.4.9",
+    "react-native-webview": "^7.4.2",
+    "rn-fetch-blob": "^0.11.2"
+  }
+}
