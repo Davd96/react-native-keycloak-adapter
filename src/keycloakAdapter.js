@@ -70,6 +70,11 @@ class KeycloakAdapter {
 
         });
     }
+
+    async logout() {
+       return this.keycloakService.logout();
+    }
+
 }
 
 export default KeycloakAdapter;
