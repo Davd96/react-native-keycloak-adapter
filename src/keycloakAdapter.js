@@ -7,7 +7,7 @@ class KeycloakAdapter {
 
     constructor(tokenStorage, keycloakService) {
         this.tokenStore = tokenStorage;
-        this.keyService = keycloakService;
+        this.keycloakService = keycloakService;
 
         this.Login = this.Login.bind(this);
         this.config = undefined;
@@ -15,10 +15,6 @@ class KeycloakAdapter {
 
     get tokenStorage() {
         return this.tokenStore;
-    }
-
-    get keycloakService() {
-        return this.keyService;
     }
 
     Login(props) {
