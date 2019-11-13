@@ -34,7 +34,7 @@ class KeycloakAdapter {
     }
 
     async decodeToken() {
-        const tokens = JSON.parse(await this.tokenStorage.loadTokens());
+        const tokens = JSON.parse(await this.tokenStorage.getTokens());
         return decodeToken(tokens.access_token);
     }
 
