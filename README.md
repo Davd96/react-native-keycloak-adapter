@@ -26,7 +26,7 @@ Adapter to authenticate in keycloak from react native.
 #### Props
 - **config**: keycloak configuration.
 
-	```json
+	```js
 	{
 	    url: 'https://<KEYCLOAK_HOST>/auth',
 	    realm: '<REALM NAME>',
