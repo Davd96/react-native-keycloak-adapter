@@ -44,7 +44,7 @@ class KeycloakAdapter {
                 isUpdatable = true;
 
             if (minutes) {
-                tokens = JSON.parse(await this.tokenStorage.getTokens()).expiration_date;
+                tokens = JSON.parse(await this.tokenStorage.getTokens());
 
                 let time = minutes * 60 * 1000;
                 let actualDate = new Date().getTime();
