@@ -1,5 +1,5 @@
 {
-  "name": "react-native-keycloak-adapter",
+  "name": "@itmatter/react-native-keycloak-adapter",
   "version": "1.1.3",
   "description": "Adapter to authenticate in keycloak from react native.",
   "main": "index.js",
@@ -22,5 +22,13 @@
     "react-native-uuid": "^1.4.9",
     "react-native-webview": "^7.4.2",
     "rn-fetch-blob": "^0.11.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mchynal/react-native-keycloak-adapter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mchynal/react-native-keycloak-adapter/issues"
+  },
+  "homepage": "https://github.com/mchynal/react-native-keycloak-adapter#readme"
 }
