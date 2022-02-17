@@ -1,10 +1,6 @@
 import * as querystring from 'query-string';
 import * as urlManager from './url';
-
-import RNFetchBlob from 'rn-fetch-blob';
-
-
-
+import axios from 'axios';
 
 class KeycloakService {
 
@@ -28,19 +24,19 @@ class KeycloakService {
             const url = `${urlManager.getRealmURL(this.config)}/protocol/openid-connect/token`;
             const code = this._getCodeFromUrl(redirectUrl);
 
-            const requestOptions = {
+            const fullResponse = axios({
+                method: 'post',
+                url: url,
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: querystring.stringify({
+                data: querystring.stringify({
                     grant_type: 'authorization_code', redirect_uri: redirect_uri, client_id: client_id, code,
                 }),
-            };
+            })
 
-            const fullResponse = await RNFetchBlob.config({
-                trusty: true,
-            }).fetch('POST', url, requestOptions.headers, requestOptions.body);
+
             const jsonResponse = await fullResponse.json();
             if (fullResponse.respInfo.status.toString()[0] === '2') {
                 await this.tokenStorage.setTokens(jsonResponse);
@@ -58,21 +54,20 @@ class KeycloakService {
             const { client_id } = this.config;
             const url = `${urlManager.getRealmURL(this.config)}/protocol/openid-connect/token`;
 
-            const requestOptions = {
+
+            const fullResponse = axios({
+                method: 'post',
+                url: url,
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: querystring.stringify({
+                data: querystring.stringify({
                     grant_type: 'refresh_token',
                     refresh_token: token,
                     client_id: encodeURIComponent(client_id),
                 }),
-            };
-
-            const fullResponse = await RNFetchBlob.config({
-                trusty: true,
-            }).fetch('POST', url, requestOptions.headers, requestOptions.body);
+            })
 
             const jsonResponse = await fullResponse.json();
 
@@ -94,20 +89,19 @@ class KeycloakService {
             const { client_id } = this.config;
             const url = `${urlManager.getRealmURL(this.config)}/protocol/openid-connect/logout`;
 
-            const requestOptions = {
+            const fullResponse = axios({
+                method: 'post',
+                url: url,
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: querystring.stringify({
+                data: querystring.stringify({
                     refresh_token: token,
                     client_id: client_id,
-                }),
-            };
+                })
+            })
 
-            const fullResponse = await RNFetchBlob.config({
-                trusty: true,
-            }).fetch('POST', url, requestOptions.headers, requestOptions.body);
 
             if (fullResponse.respInfo.status.toString()[0] === '2') {
                 resolve();
@@ -120,4 +114,3 @@ class KeycloakService {
 }
 
 export default KeycloakService;
-
