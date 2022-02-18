@@ -1,6 +1,6 @@
 # React Native Keycloak Adapter
 
-<a href="https://www.npmjs.com/package/@itmatter/react-native-keycloak-adapter"><img src="https://img.shields.io/npm/v/react-native-keycloak-adapter.svg"></a>
+<a href="https://www.npmjs.com/package/@itmatter/react-native-keycloak-adapter"><img src="https://img.shields.io/npm/v/@itmatter/react-native-keycloak-adapter.svg"></a>
 
 Adapter to authenticate in keycloak from react native.
 
