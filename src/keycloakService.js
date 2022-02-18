@@ -24,25 +24,25 @@ class KeycloakService {
             const url = `${urlManager.getRealmURL(this.config)}/protocol/openid-connect/token`;
             const code = this._getCodeFromUrl(redirectUrl);
 
-            const fullResponse = axios({
+            const data = querystring.stringify({
+                grant_type: 'authorization_code', redirect_uri: redirect_uri, client_id: client_id, code,
+            })
+
+            const fullResponse = await axios({
                 method: 'post',
                 url: url,
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                data: querystring.stringify({
-                    grant_type: 'authorization_code', redirect_uri: redirect_uri, client_id: client_id, code,
-                }),
+                data: data,
             })
 
-
-            const jsonResponse = await fullResponse.json();
-            if (fullResponse.respInfo.status.toString()[0] === '2') {
-                await this.tokenStorage.setTokens(jsonResponse);
-                resolve(jsonResponse);
+            if (fullResponse.status.toString()[0] === '2') {
+                await this.tokenStorage.setTokens(fullResponse.data);
+                resolve(fullResponse.data);
             } else {
-                reject(jsonResponse);
+                reject(fullResponse);
             }
         });
     }
@@ -54,8 +54,7 @@ class KeycloakService {
             const { client_id } = this.config;
             const url = `${urlManager.getRealmURL(this.config)}/protocol/openid-connect/token`;
 
-
-            const fullResponse = axios({
+            const fullResponse = await axios({
                 method: 'post',
                 url: url,
                 headers: {
@@ -69,13 +68,11 @@ class KeycloakService {
                 }),
             })
 
-            const jsonResponse = await fullResponse.json();
-
-            if (fullResponse.respInfo.status.toString()[0] === '2') {
-                await this.tokenStorage.setTokens(jsonResponse);
-                resolve(jsonResponse);
+            if (fullResponse.status.toString()[0] === '2') {
+                await this.tokenStorage.setTokens(fullResponse.data);
+                resolve(fullResponse.data);
             } else {
-                reject(jsonResponse);
+                reject(fullResponse);
             }
         });
     }
@@ -89,7 +86,7 @@ class KeycloakService {
             const { client_id } = this.config;
             const url = `${urlManager.getRealmURL(this.config)}/protocol/openid-connect/logout`;
 
-            const fullResponse = axios({
+            const fullResponse = await axios({
                 method: 'post',
                 url: url,
                 headers: {
@@ -103,7 +100,7 @@ class KeycloakService {
             })
 
 
-            if (fullResponse.respInfo.status.toString()[0] === '2') {
+            if (fullResponse.status.toString()[0] === '2') {
                 resolve();
             } else {
                 reject();
