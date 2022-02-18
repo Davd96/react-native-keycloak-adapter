@@ -25,6 +25,7 @@ class LoginWebView extends Component {
         this._handleOpenURL = this._handleOpenURL.bind(this);
         this._onLoadStart = this._onLoadStart.bind(this);
         this._onLoadEnd = this._onLoadEnd.bind(this);
+
     }
 
     async _handleOpenURL(request) {
@@ -42,7 +43,7 @@ class LoginWebView extends Component {
 
     _handleRedirect(request) {
         this._handleOpenURL(request, this.props);
-        return false;
+        return true;
     }
 
     _onLoadStart() {
@@ -63,7 +64,7 @@ class LoginWebView extends Component {
             <View style={styles.container}>
                 <WebView
                     {...this.props}
-                    originWhitelist={this.props.originWhitelist || ['*']}
+                    originWhitelist={['*']}
                     onShouldStartLoadWithRequest={this._handleRedirect}
                     injectedJavaScript={!this.props.disableZoom ? null : disableZoomJavascript}
                     source={{ uri: this.state.url }}
